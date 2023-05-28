@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+const router = useRouter()
+
 const num = ref()
 const currentGuess = ref(null)
 const attemptNumber = ref(0)
 const guessList: any = ref([])
 const win = ref(false)
 // helpers
-function toArray(n) {
+function toArray(n: any) {
   const numArray = String(n)
     .split('')
     .map((n) => {
@@ -18,7 +20,7 @@ function toArray(n) {
 function generateRandomNumber() {
   return shuffle('0123456789'.split('')).join('').substring(0, 4)
 }
-function shuffle(o) {
+function shuffle(o: any) {
   for (let j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
   return o
 }
@@ -52,6 +54,9 @@ function checkGuess() {
   })
   currentGuess.value = (null)
 }
+function playAgain() {
+  router.go(0)
+}
 
 onMounted(() => {
   num.value = generateRandomNumber()
@@ -63,6 +68,8 @@ onMounted(() => {
     <h1 class="mb-5 text-3xl">
       Punto y Fama
     </h1>
+
+    <!-- Guess Input -->
     <div v-if="!win">
       <p class="pb-2 text-sm">
         Guess a 4 digit number:
@@ -74,7 +81,21 @@ onMounted(() => {
         </button>
       </div>
     </div>
+
+    <!-- You won -->
+    <div v-if="win">
+      <h1 class="text-xl">
+        Congratulations! You won!
+      </h1>
+      <h3>It took you {{ attemptNumber }} attempts to win</h3>
+      <h3>Try to beat your record!</h3>
+      <button class="mt-2 text-lg btn" @click="playAgain">
+        Play again!
+      </button>
+    </div>
+
     <div>
+      <!-- Result table -->
       <table v-if="guessList.length !== 0" class="min-w-xs table-auto text-left">
         <thead class="border-b font-medium dark:border-neutral-500">
           <tr>

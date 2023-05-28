@@ -75,7 +75,7 @@ onMounted(() => {
         Guess a 4 digit number:
       </p>
       <div class="flex items-center text-left space-x-2">
-        <input v-model="currentGuess" type="text" maxlength="4" class="mx-auto w-24 border-2 rounded-xl p-3 text-center text-2xl">
+        <input v-model="currentGuess" inputmode="numeric" pattern="[0-9]*" type="text" maxlength="4" class="mx-auto w-24 border-2 rounded-xl p-3 text-center text-2xl">
         <button class="rounded-xl p-5 btn" @click="checkGuess()">
           <div i-carbon:arrow-right />
         </button>

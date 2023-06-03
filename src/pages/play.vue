@@ -75,7 +75,7 @@ onMounted(() => {
         Guess a 4 digit number:
       </p>
       <div class="flex items-center text-left space-x-2">
-        <input v-model="currentGuess" inputmode="numeric" pattern="[0-9]*" type="text" maxlength="4" class="mx-auto w-24 border-2 rounded-xl p-3 text-center text-2xl">
+        <input v-model="currentGuess" inputmode="numeric" pattern="[0-9]*" type="text" maxlength="4" class="mx-auto w-24 border-2 rounded-xl p-3 text-center text-2xl" @keypress.enter="checkGuess">
         <button class="rounded-xl p-5 btn" @click="checkGuess()">
           <div i-carbon:arrow-right />
         </button>
@@ -110,13 +110,13 @@ onMounted(() => {
         </thead>
         <tbody>
           <tr v-for="guess in guessList" :key="guess.attemptNumber" class="odd:bg-gray-100 dark:odd:bg-zinc-800">
-            <td class="border-r p-4">
+            <td class="border-r px-4">
               {{ guess.attemptNumber }}
             </td>
-            <td class="border-r p-2">
+            <td class="border-r p-1.5">
               {{ guess.guess }}
             </td>
-            <td class="p-2">
+            <td class="p-1.5">
               {{ guess.result }}
             </td>
           </tr>

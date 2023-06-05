@@ -17,7 +17,6 @@ function play() {
     </div>
 
     <div py-4 />
-    <Workplace />
     <div>
       <button class="p-3 text-3xl btn" @click="play">
         Start game
